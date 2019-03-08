@@ -1,0 +1,254 @@
+body{
+    margin: 0px;
+    background-color: rgb(122, 189, 228);
+}
+
+#bar{
+	height: 2em;
+	margin-bottom: 8px;
+    padding-bottom: 1.7em;
+    display: none;
+}
+
+.logo{
+	font-size: 45px;
+	margin: 0.4em;
+	margin-left: 4vw;
+	display: inline-block;
+    color: rgb(27, 27, 27);
+    font-family: "Oleo Script";
+}
+
+.nav{
+	list-style: none;
+	display: flex;
+	flex-direction: row;
+	float: right;
+	margin-right: 4vw;
+}
+
+.nav li a{
+	text-decoration: none;
+	color: inherit;
+	padding: 0.5em;
+	padding-left: 0.9em;
+	padding-right: 0.9em;
+	font-size: 14px;
+	font-family: "Roboto", sans serif;
+}
+
+.nav li a:hover{
+	border-radius: 10px;
+	color: rgb(83, 45, 45);
+	background-color: black;
+	transition-duration: 1s;
+}
+
+.nav img{
+    height: 45px;
+    margin: 0em 1em 0em 1em;
+}
+
+#page{
+    background-image: linear-gradient(#E7E6E6, white 2.5%);
+    display: none;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 1200px;
+}
+
+#meter{
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+    background-image: linear-gradient(to left, green, yellow, red);
+    height: 50px;
+    border: 2px inset rgb(187, 185, 185);
+}
+
+#mvalue{
+    background-color: rgb(199, 198, 196);
+    width: 40%;
+}
+
+#dial{
+    height: 300px;
+    width: 300px;
+    border-radius: 300px;
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#dvalue{
+    height: 250px;
+    width: 250px;
+    border-radius: 300px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    font-weight: bold;
+}
+
+#quality{
+    font-size: 35px;
+    margin-top: 2em;
+    font-weight: bold;
+}
+
+#main{
+    margin: 1em 0 3em 0;
+    color: black;
+    width: 95%;
+}
+
+#heading{
+    height: 130px;
+    width: 100%;
+    font-size: 4.2em;
+    font-family: "Oleo Script";
+    color: black;
+    border-bottom: 4px solid rgb(134, 247, 119);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(210, 214, 214);
+}
+
+#content{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+}
+
+#content .gas{
+    display: flex;
+    font-family: "Basic";
+    padding: 1em 0 1em 0;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 4px solid rgb(134, 247, 119);
+}
+
+.gas-name{
+    width: 20%;
+    text-align: center;
+}
+
+.gas-dtl{
+    width: 20%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.gas-graph{
+    display: none;
+}
+
+iframe{
+    background-color: black;
+}
+
+.details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+}
+
+.disp-details{
+    cursor: pointer;
+    background-color: rgb(122, 189, 228);
+    padding: 0.2em 0.5em 0.2em 0.5em;
+    border-radius: 5px;
+}
+
+#foot{
+    height: 120px;
+    font-size: 2em;
+    font-family: "Baloo";
+    width: 100%;
+}
+
+#preloader{
+    display: flex;
+    margin-top: 5em;
+    height: 400px;
+    margin-bottom: 8em;
+    width: 80%;
+    flex-direction: column;
+    background-color: rgb(133, 122, 122);
+    justify-content: space-around;
+    align-items: center;
+}
+
+.loadtext{
+    font-size: 3.5em;
+    color: rgb(9, 59, 7);
+}
+
+#preload-cont{
+    width: 150px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.dots{
+    height: 15px;
+    width: 15px;
+    background-color: beige;
+    opacity: 0.3;
+}
+
+@media screen and (max-width: 1080px) {
+    #main{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    #main{
+        width: 90%;
+    }
+    .loadtext{
+        font-size: 3em;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .details{
+        display: none;
+    }
+    .gas-name{
+        width: 40%;
+    }
+    .gas-amt{
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    #main{
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    #heading{
+        font-size: 3em;
+    }
+}

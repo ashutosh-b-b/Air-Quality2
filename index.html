@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Air Quality</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Oleo Script' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Basic' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Baloo' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <center>
+        <div id="preloader">
+            <h2 class="loadtext">Fetching Data from Sensors...</h2>
+            <div id="preload-cont">
+                <div class="dots"></div>
+                <div class="dots"></div>
+                <div class="dots"></div>
+                <div class="dots"></div>
+                <div class="dots"></div>
+            </div>
+        </div>
+    </center>
+
+    <div id="bar">
+        <div class="logo">
+            Inhale...
+        </div>
+        <ul class="nav">
+            <li><img src="aries.png" /></li>
+            <li><img src="sac.jpeg" /></li>
+        </ul>
+    </div>
+
+    <div id="page">
+
+       <!--<div id="quality">Quality</div>
+
+        <div id="meter">
+            <div id="mvalue"></div>
+        </div>--> 
+
+        <div id="dial">
+            <div id="dvalue">Quality</div>
+        </div>
+
+        <div id="main">
+            <div id="heading">
+                <div>Air Quality Index</div>
+            </div>
+            <div id="content">
+                <div class="gas">
+                    <div class="gas-name" id="">CO</div>
+                    <div class="details">
+                        <div class="disp-details" data-show="0" data-id="0">Simulation</div>
+                        <div class="gas-graph" id="" data-id="0"><iframe width="450" height="260" style="border: 1px solid #cccccc;"src="https://thingspeak.com/channels/719103/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe></div>
+                    </div>
+                    <div class="gas-dtl" id="gas1">
+                        <div class="gas-amt">-/-</div>
+                        <div class="pervalue">35 ppm</div>
+                        <div class="gas-quality">NA</div>
+                    </div>
+                </div>
+                <div class="gas">
+                    <div class="gas-name" id="">CO<sub>2</sub></div>
+                    <div class="details">
+                        <div class="disp-details" data-show="0" data-id="1">Simulation</div>
+                        <div class="gas-graph" id="" data-id="1"><iframe width="450" height="260" style="border: 1px solid #cccccc;"src="https://thingspeak.com/channels/719103/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe></div>
+                    </div>
+                    <div class="gas-dtl" id="">
+                            <div class="gas-amt">-/-</div>
+                            <div class="pervalue">1000ppm</div>
+                            <div class="gas-quality">NA</div>
+                    </div>
+                </div>
+                <div class="gas">
+                    <div class="gas-name" id="">Temperature</div>
+                    <div class="details">
+                        <div class="disp-details" data-show="0" data-id="2">Simulation</div>
+                        <div class="gas-graph" id="" data-id="2"><iframe width="450" height="260" style="border: 1px solid #cccccc;"src="https://thingspeak.com/channels/719103/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe></div>
+                    </div>
+                    <div class="gas-dtl" id="">
+                            <div class="gas-amt">-/-</div>
+                    </div>
+                </div>
+                <div class="gas">
+                    <div class="gas-name" id="">Humidity</div>
+                    <div class="details">
+                        <div class="disp-details" data-show="0" data-id="3">Simulation</div>
+                        <div class="gas-graph" id="" data-id="3"><iframe width="450" height="260" style="border: 1px solid #cccccc;"src="https://thingspeak.com/channels/719103/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe></div>
+                    </div>
+                    <div class="gas-dtl" id="">
+                            <div class="gas-amt">-/-</div>
+                    </div>
+                </div>
+                <div class="gas">
+                    <div class="gas-name" id="">Dust Density</div>
+                    <div class="details">
+                        <div class="disp-details" data-show="0" data-id="4">Simulation</div>
+                        <div class="gas-graph" id="" data-id="4"><iframe width="450" height="260" style="border: 1px solid #cccccc;"src="https://thingspeak.com/channels/719103/charts/5?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe></div>
+                    </div>
+                    <div class="gas-dtl" id="">
+                            <div class="gas-amt">-/-</div>
+                    </div>
+                </div>
+            </div>
+            <!--<div id="foot">
+                <div>Quality</div>
+            </div>-->
+        </div>
+    </div>
+    
+    <script type="text/javascript">
+        const preloader = document.getElementById("preloader");
+        const page = document.getElementById("page");
+        const dots = document.getElementsByClassName("dots");
+        const bar = document.getElementById("bar");
+
+        dots[0].style.opacity = "1";
+        var i = 1;
+        var dotControl;
+        
+        function runPre(){
+            page.style.display = "flex";
+            preloader.style.display = "none";
+            bar.style.display = "block";
+        }
+
+        setInterval(dotsBlink, 100);
+
+        function dotsBlink(){
+            if(i!=0){
+                dots[i-1].style.opacity = "0.3";
+                dots[i].style.opacity = "1";
+            }
+            else{
+                dots[4].style.opacity = "0.3";
+                dots[0].style.opacity = "1";
+            }
+            i++;
+            if(i==5) i=0;
+        }
+
+        setTimeout(runPre, 3000);
+
+        gas = document.getElementsByClassName('gas-amt');
+
+        var request = new XMLHttpRequest();
+
+        var data;
+        const meter = document.getElementById("meter");
+        const mvalue = document.getElementById("mvalue");
+        const gas_quality = document.querySelectorAll(".gas-quality");
+        const dvalue = document.getElementById("dvalue");
+        const dial = document.getElementById("dial");
+
+        let qvalue = 4;
+        
+        function getData(){
+            request.addEventListener('load', onLoad);
+            request.open('GET', 'https://api.thingspeak.com/channels/719103/feeds.json?api_key=AL6A5FFK7LKOP53I&results=2');
+            request.send();
+            setTimeout(getData, 15000);
+        }
+        
+ 
+        function onLoad(){
+          data = JSON.parse(this.responseText).feeds;
+          gas[0].innerHTML = data[1].field4+" ppm";
+          gas[1].innerHTML = data[1].field3+" ppm";
+          gas[2].innerHTML = data[1].field1+" \xB0C";
+          gas[3].innerHTML = data[1].field2+" %";
+          gas[4].innerHTML = data[1].field5+" mg/m<sup>3</sup>";
+          //mvalue.style.width = qvalue*10 + "%";
+          checkCO(data[1].field4);
+          checkCO2(data[1].field3);
+          checkQuality(data[1].field4, data[1].field3);
+        }
+
+        function checkCO(val){
+            if(val<=9){
+                gas_quality[0].innerHTML = "Safe";
+                gas_quality[0].style.color = "#4FE30F";
+            }
+            else if(val<=35){
+                gas_quality[0].innerHTML = "Moderate";
+                gas_quality[0].style.color = "#EFF61A";
+            }
+            else{
+                gas_quality[0].innerHTML = "Poor";
+                gas_quality[0].style.color = "#4F6381A";
+            }
+        }
+
+        function checkCO2(val){
+            if(val<=350){
+                gas_quality[1].innerHTML = "Safe";
+                gas_quality[1].style.color = "#4FE30F";
+            }
+            else if(val<=1000){
+                gas_quality[1].innerHTML = "Moderate";
+                gas_quality[1].style.color = "#EFF61A";
+            }
+            else{
+                gas_quality[1].innerHTML = "Poor";
+                gas_quality[1].style.color = "#4F6381A";
+            }
+        }
+
+        let hue;
+
+        function checkQuality(co, co2){
+            let qco = co/55*100;
+            let qco2 = co2/1100*100;
+            let avgair = (qco+qco2)/2;
+            if(avgair<33){
+                dvalue.innerHTML = "Good";
+            }
+            else if(avgair<67){
+                dvalue.innerHTML = "Moderate";
+            }
+            else{
+                dvalue.innerHTML = "Poor";
+            }
+            hue = 100 - (avgair/104*100);
+            dial.style.backgroundColor = `hsl(${hue}, 73%, 50%)`;
+            dvalue.style.color = `hsl(${hue}, 73%, 35%)`;
+        }
+
+        getData();
+
+        details = document.querySelectorAll(".disp-details");
+        graphs = document.querySelectorAll(".gas-graph");
+        details.forEach(detail => {
+            detail.addEventListener('click',() => {
+                if(detail.getAttribute("data-show")=="1"){
+                    detail.setAttribute("data-show","0");
+                    detail.innerHTML="Hide";
+                    graphs[detail.getAttribute("data-id")].style.display = "block";
+                }
+                else{
+                    detail.setAttribute("data-show","1");
+                    detail.innerHTML="Simulation";
+                    graphs[detail.getAttribute("data-id")].style.display = "none";
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
